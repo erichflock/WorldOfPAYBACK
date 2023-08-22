@@ -10,13 +10,13 @@ import XCTest
 
 final class TransactionsViewModelTests: XCTestCase {
     
-    let items: [TransactionItem] = [.init(partnerDisplayName: "first item", alias: .init(reference: "1"), category: 1),
-                                    .init(partnerDisplayName: "second item", alias: .init(reference: "2"), category: 1),
-                                    .init(partnerDisplayName: "third item", alias: .init(reference: "3"), category: 2),
-                                    .init(partnerDisplayName: "fourth item", alias: .init(reference: "4"), category: 2),
-                                    .init(partnerDisplayName: "fifth item", alias: .init(reference: "5"), category: 2),
-                                    .init(partnerDisplayName: "sixth item", alias: .init(reference: "6"), category: 3),
-                                    .init(partnerDisplayName: "seventh item", alias: .init(reference: "7"), category: 4)]
+    let items: [TransactionItem] = [.init(partnerDisplayName: "first item", alias: .init(reference: "0"), category: 1, transactionDetail: .init(bookingDate: .now.advanced(by: -6))),
+                                    .init(partnerDisplayName: "second item", alias: .init(reference: "1"), category: 1, transactionDetail: .init(bookingDate: .now.advanced(by: -5))),
+                                    .init(partnerDisplayName: "third item", alias: .init(reference: "2"), category: 2, transactionDetail: .init(bookingDate: .now.advanced(by: -4))),
+                                    .init(partnerDisplayName: "fourth item", alias: .init(reference: "3"), category: 2, transactionDetail: .init(bookingDate: .now.advanced(by: -3))),
+                                    .init(partnerDisplayName: "fifth item", alias: .init(reference: "4"), category: 2, transactionDetail: .init(bookingDate: .now.advanced(by: -2))),
+                                    .init(partnerDisplayName: "sixth item", alias: .init(reference: "5"), category: 3, transactionDetail: .init(bookingDate: .now.advanced(by: -1))),
+                                    .init(partnerDisplayName: "seventh item", alias: .init(reference: "6"), category: 4, transactionDetail: .init(bookingDate: .now.advanced(by: 0)))]
     
     func test_filteredItems_whenSearchedCategoryOne_shouldOnlyContainCategoryOne() {
         let sut: TransactionsViewModel = .init(items: items)
@@ -85,6 +85,30 @@ final class TransactionsViewModelTests: XCTestCase {
         sut.searchedCategory = ""
         
         XCTAssertEqual(sut.filteredItems, sut.items)
+    }
+    
+    func test_filteredItems_shouldBeSortedFromNewestToOldest() {
+        let sut: TransactionsViewModel = .init(items: items)
+        
+        XCTAssertEqual(sut.filteredItems[0], items[6])
+        XCTAssertEqual(sut.filteredItems[1], items[5])
+        XCTAssertEqual(sut.filteredItems[2], items[4])
+        XCTAssertEqual(sut.filteredItems[3], items[3])
+        XCTAssertEqual(sut.filteredItems[4], items[2])
+        XCTAssertEqual(sut.filteredItems[5], items[1])
+        XCTAssertEqual(sut.filteredItems[6], items[0])
+    }
+    
+    func test_filteredItems_whenSearchedCategoryTwo_shouldBeSortedFromNewestToOldest() {
+        let sut: TransactionsViewModel = .init(items: items)
+        XCTAssertEqual(sut.filteredItems, sut.items, "precondition")
+        
+        sut.searchedCategory = "2"
+        
+        XCTAssertEqual(sut.filteredItems.count, 3)
+        XCTAssertEqual(sut.filteredItems[0], items[4])
+        XCTAssertEqual(sut.filteredItems[1], items[3])
+        XCTAssertEqual(sut.filteredItems[2], items[2])
     }
     
 }

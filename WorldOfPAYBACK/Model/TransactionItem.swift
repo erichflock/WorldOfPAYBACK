@@ -13,7 +13,7 @@ struct TransactionItem: Identifiable {
     var partnerDisplayName: String
     var alias: Alias
     var category: Int?
-    var transactionDetail: TransactionDetail?
+    var transactionDetail: TransactionDetail
     
     struct Alias {
         var reference: String
@@ -21,7 +21,7 @@ struct TransactionItem: Identifiable {
     
     struct TransactionDetail {
         var description: String?
-        var bookingDate: Date?
+        var bookingDate: Date
         var value: Value?
         
         struct Value {
@@ -33,4 +33,12 @@ struct TransactionItem: Identifiable {
             case PBP
         }
     }
+}
+
+extension Array where Element == TransactionItem {
+    
+    func sortByDate() -> [TransactionItem] {
+        sorted(by: { $0.transactionDetail.bookingDate > $1.transactionDetail.bookingDate } )
+    }
+    
 }

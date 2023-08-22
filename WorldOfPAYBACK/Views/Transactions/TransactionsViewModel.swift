@@ -11,11 +11,12 @@ final class TransactionsViewModel: ObservableObject {
     
     private(set) var items: [TransactionItem] = [] {
         didSet {
-            filteredItems = items
+            filteredItems = items.sortByDate()
         }
     }
     
     @Published private(set) var filteredItems: [TransactionItem] = []
+    
     @Published var searchedCategory: String = "" {
         didSet {
             filterItems(by: searchedCategory)
@@ -23,14 +24,15 @@ final class TransactionsViewModel: ObservableObject {
     }
     
     init(items: [TransactionItem] = []) {
-        self.items = items
-        self.filteredItems = items
+        let sortedItems = items.sortByDate()
+        self.items = sortedItems
+        self.filteredItems = sortedItems
     }
     
     func fetchTransactions() {
         do {
             let transactionItemsFromApi = try TransactionsAPI().getMockData()
-            items = mapItems(from: transactionItemsFromApi?.items)
+            items = mapItems(from: transactionItemsFromApi?.items).sortByDate()
         } catch {
             //show alert
         }
@@ -38,14 +40,14 @@ final class TransactionsViewModel: ObservableObject {
     
     private func filterItems(by category: String) {
         guard !searchedCategory.isEmpty else {
-            filteredItems = items
+            filteredItems = items.sortByDate()
             return
         }
         guard let category = Int(searchedCategory) else {
             filteredItems.removeAll()
             return
         }
-        filteredItems = items.filter { $0.category == category }
+        filteredItems = items.filter { $0.category == category }.sortByDate()
     }
     
 }
@@ -59,12 +61,12 @@ extension TransactionsViewModel {
         var items: [TransactionItem] = []
         
         for apiItem in itemsFromApi {
-            if let partnerDisplayName = apiItem.partnerDisplayName, let reference = apiItem.alias?.reference {
+            if let partnerDisplayName = apiItem.partnerDisplayName, let reference = apiItem.alias?.reference, let bookingDate = apiItem.transactionDetail?.bookingDate {
                 let item: TransactionItem = .init(partnerDisplayName: partnerDisplayName,
                                                   alias: .init(reference: reference),
                                                   category: apiItem.category,
                                                   transactionDetail: .init(description: apiItem.transactionDetail?.description,
-                                                                           bookingDate: apiItem.transactionDetail?.bookingDate,
+                                                                           bookingDate: bookingDate,
                                                                            value: .init(amount: apiItem.transactionDetail?.value?.amount,
                                                                                         currency: map(apiCurrency: apiItem.transactionDetail?.value?.currency))))
                 items.append(item)
