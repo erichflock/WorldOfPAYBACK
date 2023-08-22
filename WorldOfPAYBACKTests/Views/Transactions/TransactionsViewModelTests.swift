@@ -10,13 +10,13 @@ import XCTest
 
 final class TransactionsViewModelTests: XCTestCase {
     
-    let items: [TransactionItem] = [.init(partnerDisplayName: "first item", alias: .init(reference: "0"), category: 1, transactionDetail: .init(bookingDate: .now.advanced(by: -6), value: .init(amount: 0))),
-                                    .init(partnerDisplayName: "second item", alias: .init(reference: "1"), category: 1, transactionDetail: .init(bookingDate: .now.advanced(by: -5), value: .init(amount: 0))),
-                                    .init(partnerDisplayName: "third item", alias: .init(reference: "2"), category: 2, transactionDetail: .init(bookingDate: .now.advanced(by: -4), value: .init(amount: 0))),
-                                    .init(partnerDisplayName: "fourth item", alias: .init(reference: "3"), category: 2, transactionDetail: .init(bookingDate: .now.advanced(by: -3), value: .init(amount: 0))),
-                                    .init(partnerDisplayName: "fifth item", alias: .init(reference: "4"), category: 2, transactionDetail: .init(bookingDate: .now.advanced(by: -2), value: .init(amount: 0))),
-                                    .init(partnerDisplayName: "sixth item", alias: .init(reference: "5"), category: 3, transactionDetail: .init(bookingDate: .now.advanced(by: -1), value: .init(amount: 0))),
-                                    .init(partnerDisplayName: "seventh item", alias: .init(reference: "6"), category: 4, transactionDetail: .init(bookingDate: .now.advanced(by: 0), value: .init(amount: 0)))]
+    let items: [TransactionItem] = [.init(partnerDisplayName: "first item", alias: .init(reference: "0"), category: 1, transactionDetail: .init(bookingDate: .now.advanced(by: -6), value: .init(amount: 1, currency: .PBP))),
+                                    .init(partnerDisplayName: "second item", alias: .init(reference: "1"), category: 1, transactionDetail: .init(bookingDate: .now.advanced(by: -5), value: .init(amount: 2, currency: .PBP))),
+                                    .init(partnerDisplayName: "third item", alias: .init(reference: "2"), category: 2, transactionDetail: .init(bookingDate: .now.advanced(by: -4), value: .init(amount: 3, currency: .PBP))),
+                                    .init(partnerDisplayName: "fourth item", alias: .init(reference: "3"), category: 2, transactionDetail: .init(bookingDate: .now.advanced(by: -3), value: .init(amount: 4, currency: .PBP))),
+                                    .init(partnerDisplayName: "fifth item", alias: .init(reference: "4"), category: 2, transactionDetail: .init(bookingDate: .now.advanced(by: -2), value: .init(amount: 5, currency: .PBP))),
+                                    .init(partnerDisplayName: "sixth item", alias: .init(reference: "5"), category: 3, transactionDetail: .init(bookingDate: .now.advanced(by: -1), value: .init(amount: 6, currency: .PBP))),
+                                    .init(partnerDisplayName: "seventh item", alias: .init(reference: "6"), category: 4, transactionDetail: .init(bookingDate: .now.advanced(by: 0), value: .init(amount: 7, currency: .PBP)))]
     
     func test_filteredItems_whenSearchedCategoryOne_shouldOnlyContainCategoryOne() {
         let sut: TransactionsViewModel = .init(items: items)
@@ -109,6 +109,30 @@ final class TransactionsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.filteredItems[0], items[4])
         XCTAssertEqual(sut.filteredItems[1], items[3])
         XCTAssertEqual(sut.filteredItems[2], items[2])
+    }
+    
+    func test_getSumOfFilteredItems_whenNoCategory_shouldReturnSumOfAllItems() {
+        let sut: TransactionsViewModel = .init(items: items)
+        
+        sut.searchedCategory = ""
+        
+        XCTAssertEqual(sut.getSumOfFilteredItems(), 28)
+    }
+    
+    func test_getSumOfFilteredItems_whenCategoryOne_shouldReturnSumOfAllItemsOfCategoryOne() {
+        let sut: TransactionsViewModel = .init(items: items)
+        
+        sut.searchedCategory = "1"
+        
+        XCTAssertEqual(sut.getSumOfFilteredItems(), 3)
+    }
+    
+    func test_getSumOfFilteredItems_whenCategoryTwo_shouldReturnSumOfAllItemsOfCategoryTwo() {
+        let sut: TransactionsViewModel = .init(items: items)
+        
+        sut.searchedCategory = "2"
+        
+        XCTAssertEqual(sut.getSumOfFilteredItems(), 12)
     }
     
 }

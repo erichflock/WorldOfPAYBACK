@@ -38,6 +38,10 @@ final class TransactionsViewModel: ObservableObject {
         }
     }
     
+    func getSumOfFilteredItems() -> Int {
+        filteredItems.map( { $0.transactionDetail.value.amount } ).reduce(0, +)
+    }
+    
     private func filterItems(by category: String) {
         guard !searchedCategory.isEmpty else {
             filteredItems = items.sortByDate()
