@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct TransactionsView: View {
+    
+    @ObservedObject private var viewModel: TransactionsViewModel = .init()
+    
     var body: some View {
-        Text("Transactions")
+        NavigationView {
+            List {
+                ForEach(viewModel.items) { item in
+                    TransactionsItemView(partnerName: item.partnerDisplayName,
+                                         reference: item.alias.reference)
+                }
+            }
+            .navigationTitle("Transactions")
+        }
+        .onAppear {
+            viewModel.fetchTransactions()
+        }
     }
 }
 
