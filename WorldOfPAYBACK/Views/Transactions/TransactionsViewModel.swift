@@ -61,22 +61,21 @@ extension TransactionsViewModel {
         var items: [TransactionItem] = []
         
         for apiItem in itemsFromApi {
-            if let partnerDisplayName = apiItem.partnerDisplayName, let reference = apiItem.alias?.reference, let bookingDate = apiItem.transactionDetail?.bookingDate {
+            if let partnerDisplayName = apiItem.partnerDisplayName, let reference = apiItem.alias?.reference, let bookingDate = apiItem.transactionDetail?.bookingDate, let amount = apiItem.transactionDetail?.value?.amount, let currency = apiItem.transactionDetail?.value?.currency {
                 let item: TransactionItem = .init(partnerDisplayName: partnerDisplayName,
                                                   alias: .init(reference: reference),
                                                   category: apiItem.category,
                                                   transactionDetail: .init(description: apiItem.transactionDetail?.description,
                                                                            bookingDate: bookingDate,
-                                                                           value: .init(amount: apiItem.transactionDetail?.value?.amount,
-                                                                                        currency: map(apiCurrency: apiItem.transactionDetail?.value?.currency))))
+                                                                           value: .init(amount: amount,
+                                                                                        currency: map(apiCurrency: currency))))
                 items.append(item)
             }
         }
         return items
     }
     
-    private func map(apiCurrency: TransactionsApiModel.Item.TransactionDetail.Currency?) -> TransactionItem.TransactionDetail.Currency? {
-        guard let apiCurrency else { return nil }
+    private func map(apiCurrency: TransactionsApiModel.Item.TransactionDetail.Currency) -> TransactionItem.TransactionDetail.Currency {
         switch apiCurrency {
         case .PBP : return .PBP
         }

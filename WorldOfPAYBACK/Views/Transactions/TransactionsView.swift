@@ -16,7 +16,7 @@ struct TransactionsView: View {
             List {
                 ForEach(viewModel.filteredItems) { item in
                     TransactionsItemView(partnerName: item.partnerDisplayName,
-                                         reference: item.alias.reference)
+                                         reference: item.alias.reference, amount: item.transactionDetail.value.amount, currency: item.transactionDetail.value.currency)
                 }
             }
             .searchable(text: $viewModel.searchedCategory)

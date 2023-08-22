@@ -22,15 +22,19 @@ struct TransactionItem: Identifiable {
     struct TransactionDetail {
         var description: String?
         var bookingDate: Date
-        var value: Value?
+        var value: Value
         
         struct Value {
-            var amount: Int?
-            var currency: Currency?
+            var amount: Int
+            var currency: Currency
         }
         
         enum Currency: String {
             case PBP
+            
+            var name: String {
+                rawValue
+            }
         }
     }
 }
