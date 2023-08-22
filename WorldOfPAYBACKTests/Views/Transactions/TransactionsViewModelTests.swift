@@ -18,7 +18,7 @@ final class TransactionsViewModelTests: XCTestCase {
                                     .init(partnerDisplayName: "sixth item", alias: .init(reference: "6"), category: 3),
                                     .init(partnerDisplayName: "seventh item", alias: .init(reference: "7"), category: 4)]
     
-    func test_searchedCategory_whenSearchedCategoryOne_filteredItemsShouldOnlyContainCategoryOne() {
+    func test_filteredItems_whenSearchedCategoryOne_shouldOnlyContainCategoryOne() {
         let sut: TransactionsViewModel = .init(items: items)
         XCTAssertEqual(sut.filteredItems, sut.items, "precondition")
         
@@ -32,7 +32,7 @@ final class TransactionsViewModelTests: XCTestCase {
         }
     }
     
-    func test_filterItemsByCategory_whenSearchedCategoryTwo_filteredItemsShouldOnlyContainCategoryTwo() {
+    func test_filteredItems_whenSearchedCategoryTwo_shouldOnlyContainCategoryTwo() {
         let sut: TransactionsViewModel = .init(items: items)
         XCTAssertEqual(sut.filteredItems, sut.items, "precondition")
         
@@ -46,7 +46,7 @@ final class TransactionsViewModelTests: XCTestCase {
         }
     }
     
-    func test_filterItemsByCategory_whenSearchedCategoryFour_filteredItemsShouldOnlyContainCategoryFour() {
+    func test_filteredItems_whenSearchedCategoryFour_shouldOnlyContainCategoryFour() {
         let sut: TransactionsViewModel = .init(items: items)
         XCTAssertEqual(sut.filteredItems, sut.items, "precondition")
         
@@ -60,7 +60,7 @@ final class TransactionsViewModelTests: XCTestCase {
         }
     }
     
-    func test_filterItemsByCategory_whenSearchedCategoryTen_filteredItemsShouldBeEmpty() {
+    func test_filteredItems_whenSearchedCategoryTen_shouldBeEmpty() {
         let sut: TransactionsViewModel = .init(items: items)
         XCTAssertEqual(sut.filteredItems, sut.items, "precondition")
         
@@ -69,7 +69,7 @@ final class TransactionsViewModelTests: XCTestCase {
         XCTAssertTrue(sut.filteredItems.isEmpty)
     }
     
-    func test_filterItemsByCategory_whenSearchedCategoryString_filteredItemsShouldBeEmpty() {
+    func test_filteredItems_whenSearchedCategoryString_shouldBeEmpty() {
         let sut: TransactionsViewModel = .init(items: items)
         XCTAssertEqual(sut.filteredItems, sut.items, "precondition")
         
@@ -78,7 +78,7 @@ final class TransactionsViewModelTests: XCTestCase {
         XCTAssertTrue(sut.filteredItems.isEmpty)
     }
     
-    func test_filterItemsByCategory_whenSearchedCategoryEmpty_filteredItemsShouldBeEqualItems() {
+    func test_filteredItems_whenSearchedCategoryEmpty_shouldBeEqualItems() {
         let sut: TransactionsViewModel = .init(items: items)
         XCTAssertEqual(sut.filteredItems, sut.items, "precondition")
         
