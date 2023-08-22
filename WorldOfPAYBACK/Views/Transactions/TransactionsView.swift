@@ -14,11 +14,13 @@ struct TransactionsView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.items) { item in
+                ForEach(viewModel.filteredItems) { item in
                     TransactionsItemView(partnerName: item.partnerDisplayName,
                                          reference: item.alias.reference)
                 }
             }
+            .searchable(text: $viewModel.searchedCategory)
+            .keyboardType(.numberPad)
             .navigationTitle("Transactions")
         }
         .onAppear {

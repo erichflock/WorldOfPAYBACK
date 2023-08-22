@@ -9,9 +9,18 @@ import SwiftUI
 
 final class TransactionsViewModel: ObservableObject {
     
-    private(set) var items: [TransactionItem] = []
+    private(set) var items: [TransactionItem] = [] {
+        didSet {
+            filteredItems = items
+        }
+    }
     
     @Published private(set) var filteredItems: [TransactionItem] = []
+    @Published var searchedCategory: String = "" {
+        didSet {
+            filterItems(by: searchedCategory)
+        }
+    }
     
     init(items: [TransactionItem] = []) {
         self.items = items
@@ -27,7 +36,15 @@ final class TransactionsViewModel: ObservableObject {
         }
     }
     
-    func filterItems(by category: Int) {
+    private func filterItems(by category: String) {
+        guard !searchedCategory.isEmpty else {
+            filteredItems = items
+            return
+        }
+        guard let category = Int(searchedCategory) else {
+            filteredItems.removeAll()
+            return
+        }
         filteredItems = items.filter { $0.category == category }
     }
     
