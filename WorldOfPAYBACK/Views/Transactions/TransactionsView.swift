@@ -10,11 +10,12 @@ import SwiftUI
 struct TransactionsView: View {
     
     @ObservedObject private var viewModel: TransactionsViewModel = .init()
+    @StateObject var internetConnection = InternetConnection()
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                List {
+            List {
+                if internetConnection.connected {
                     sumView
                     ForEach(viewModel.filteredItems) { item in
                         NavigationLink(destination: TransactionDetailsView(partnerDisplayName: item.partnerDisplayName,
@@ -25,16 +26,34 @@ struct TransactionsView: View {
                         }
                     }
                 }
-                .searchable(text: $viewModel.searchedCategory,
-                            prompt: Text(NSLocalizedString("category",
-                                                           comment: "")))
-                .keyboardType(.numberPad)
-                .navigationTitle(NSLocalizedString("transactions",
-                                                   comment: ""))
+            }
+            .searchable(text: $viewModel.searchedCategory,
+                        prompt: Text(NSLocalizedString("category",
+                                                       comment: "")))
+            .keyboardType(.numberPad)
+            .navigationTitle(NSLocalizedString("transactions",
+                                               comment: ""))
+            .overlay {
+                if !internetConnection.connected {
+                    VStack(alignment: .center, spacing: 10) {
+                        Image(systemName: "icloud.slash")
+                            .font(.system(size: 60))
+                        Text(NSLocalizedString("noInternetMessage", comment: ""))
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    .offset(y: -50)
+                }
             }
         }
         .onAppear {
+            internetConnection.checkConnection()
             viewModel.fetchTransactions()
+        }
+        .onChange(of: internetConnection.connected) { connected in
+            if connected {
+                viewModel.fetchTransactions()
+            }
         }
     }
     

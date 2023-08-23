@@ -9,3 +9,4 @@
 "transactions"="Transaktionen";
 "category"="Kategorie";
 "sum"="Summe";
+"noInternetMessage" = "Kein Internet.\nBitte überprüfen Sie Ihre Internetverbindung.";
