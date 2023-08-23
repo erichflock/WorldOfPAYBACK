@@ -16,6 +16,12 @@ struct MainView: View {
                                             comment: ""),
                           systemImage: "list.bullet.rectangle.portrait")
                 })
+            SettingsView()
+                .tabItem({
+                    Label(NSLocalizedString("settings",
+                                            comment: ""),
+                          systemImage: "gear")
+                })
         }
     }
 }

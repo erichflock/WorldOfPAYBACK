@@ -18,7 +18,7 @@ struct TransactionsItemView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(reference)
                     .font(.headline)
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
             }
             Spacer()
             Text("\(amount) \(currency.name)")
