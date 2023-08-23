@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct MainView: View {    
     var body: some View {
         TabView {
             TransactionsView()

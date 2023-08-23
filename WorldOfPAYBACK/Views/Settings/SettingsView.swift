@@ -9,7 +9,17 @@ import SwiftUI
 
 struct SettingsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List {
+                #if DEBUG
+                NavigationLink(destination: DebugView()) {
+                    Text("Debug")
+                }
+                #endif
+            }
+            .navigationTitle(NSLocalizedString("settings",
+                                               comment: ""))
+        }
     }
 }
 

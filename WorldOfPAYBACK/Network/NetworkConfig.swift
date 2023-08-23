@@ -5,7 +5,16 @@
 //  Created by Erich.Flock on 21.08.23.
 //
 
+import SwiftUI
+
 struct NetworkConfig {
+    
+    enum NetworkEnvironment: String, CaseIterable, Identifiable {
+        case production
+        case test
+        case mock
+        var id: Self { self }
+    }
     
     struct URL {
         static let production = "https://api.payback.com/"
@@ -15,5 +24,7 @@ struct NetworkConfig {
             static let transactions = "transactions"
         }
     }
+    
+    static var networkEnvironment: NetworkEnvironment = .production
     
 }
