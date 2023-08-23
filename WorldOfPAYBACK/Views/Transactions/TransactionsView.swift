@@ -25,7 +25,8 @@ struct TransactionsView: View {
                         }
                     }
                 }
-                .searchable(text: $viewModel.searchedCategory)
+                .searchable(text: $viewModel.searchedCategory,
+                            prompt: Text("Category"))
                 .keyboardType(.numberPad)
                 .navigationTitle("Transactions")
             }
