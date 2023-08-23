@@ -17,9 +17,12 @@ struct TransactionsView: View {
                 List {
                     sumView
                     ForEach(viewModel.filteredItems) { item in
-                        TransactionsItemView(partnerName: item.partnerDisplayName,
-                                             reference: item.alias.reference, amount: item.transactionDetail.value.amount,
-                                             currency: item.transactionDetail.value.currency)
+                        NavigationLink(destination: TransactionDetailsView(viewModel: .init(transactionDetails: item.transactionDetail))) {
+                            TransactionsItemView(partnerName: item.partnerDisplayName,
+                                                 reference: item.alias.reference,
+                                                 amount: item.transactionDetail.value.amount,
+                                                 currency: item.transactionDetail.value.currency)
+                        }
                     }
                 }
                 .searchable(text: $viewModel.searchedCategory)
