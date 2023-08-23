@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B80EE9502A96532A00B84315 /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EE94F2A96532A00B84315 /* TransactionDetailsView.swift */; };
-		B80EE9522A96534000B84315 /* TransactionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EE9512A96534000B84315 /* TransactionDetailsViewModel.swift */; };
 		B816AB102A93BA22003A850D /* TransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816AB0F2A93BA22003A850D /* TransactionsView.swift */; };
 		B816AB142A93C13A003A850D /* TransactionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816AB132A93C13A003A850D /* TransactionsAPI.swift */; };
 		B816AB162A93C1C7003A850D /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816AB152A93C1C7003A850D /* NetworkConfig.swift */; };
@@ -47,7 +46,6 @@
 
 /* Begin PBXFileReference section */
 		B80EE94F2A96532A00B84315 /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
-		B80EE9512A96534000B84315 /* TransactionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewModel.swift; sourceTree = "<group>"; };
 		B816AB0F2A93BA22003A850D /* TransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsView.swift; sourceTree = "<group>"; };
 		B816AB112A93BDAC003A850D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B816AB132A93C13A003A850D /* TransactionsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsAPI.swift; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				B80EE94F2A96532A00B84315 /* TransactionDetailsView.swift */,
-				B80EE9512A96534000B84315 /* TransactionDetailsViewModel.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -395,7 +392,6 @@
 				B8D21AF72A93B50A006AED82 /* WorldOfPAYBACKApp.swift in Sources */,
 				B816AB242A93E2C8003A850D /* TransactionsApiModel.swift in Sources */,
 				B816AB102A93BA22003A850D /* TransactionsView.swift in Sources */,
-				B80EE9522A96534000B84315 /* TransactionDetailsViewModel.swift in Sources */,
 				B859ED422A94FAB50096CD8C /* TransactionsViewModel.swift in Sources */,
 				B80EE9502A96532A00B84315 /* TransactionDetailsView.swift in Sources */,
 				B816AB142A93C13A003A850D /* TransactionsAPI.swift in Sources */,

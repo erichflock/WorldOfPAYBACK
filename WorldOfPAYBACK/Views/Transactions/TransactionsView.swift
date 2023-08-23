@@ -17,9 +17,9 @@ struct TransactionsView: View {
                 List {
                     sumView
                     ForEach(viewModel.filteredItems) { item in
-                        NavigationLink(destination: TransactionDetailsView(viewModel: .init(transactionDetails: item.transactionDetail))) {
-                            TransactionsItemView(partnerName: item.partnerDisplayName,
-                                                 reference: item.alias.reference,
+                        NavigationLink(destination: TransactionDetailsView(partnerDisplayName: item.partnerDisplayName,
+                                                                           description: item.transactionDetail.description)) {
+                            TransactionsItemView(reference: item.alias.reference,
                                                  amount: item.transactionDetail.value.amount,
                                                  currency: item.transactionDetail.value.currency)
                         }
