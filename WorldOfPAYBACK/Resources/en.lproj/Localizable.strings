@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  WorldOfPAYBACK
+
+  Created by Erich.Flock on 23.08.23.
+  
+*/
+
+"transactions"="Transactions";
+"category"="Category";
+"sum"="Sum";

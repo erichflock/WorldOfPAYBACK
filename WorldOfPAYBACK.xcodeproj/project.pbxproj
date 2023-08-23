@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B80EE9502A96532A00B84315 /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EE94F2A96532A00B84315 /* TransactionDetailsView.swift */; };
+		B80EE9562A96626700B84315 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B80EE9582A96626700B84315 /* Localizable.strings */; };
 		B816AB102A93BA22003A850D /* TransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816AB0F2A93BA22003A850D /* TransactionsView.swift */; };
 		B816AB142A93C13A003A850D /* TransactionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816AB132A93C13A003A850D /* TransactionsAPI.swift */; };
 		B816AB162A93C1C7003A850D /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816AB152A93C1C7003A850D /* NetworkConfig.swift */; };
@@ -22,7 +23,6 @@
 		B8D21AF72A93B50A006AED82 /* WorldOfPAYBACKApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D21AF62A93B50A006AED82 /* WorldOfPAYBACKApp.swift */; };
 		B8D21AF92A93B50A006AED82 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D21AF82A93B50A006AED82 /* MainView.swift */; };
 		B8D21AFB2A93B50B006AED82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8D21AFA2A93B50B006AED82 /* Assets.xcassets */; };
-		B8D21AFE2A93B50B006AED82 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8D21AFD2A93B50B006AED82 /* Preview Assets.xcassets */; };
 		B8D21B132A93B50B006AED82 /* WorldOfPAYBACKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D21B122A93B50B006AED82 /* WorldOfPAYBACKUITests.swift */; };
 		B8D21B152A93B50B006AED82 /* WorldOfPAYBACKUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D21B142A93B50B006AED82 /* WorldOfPAYBACKUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +46,9 @@
 
 /* Begin PBXFileReference section */
 		B80EE94F2A96532A00B84315 /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
+		B80EE9572A96626700B84315 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B80EE9592A96626D00B84315 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B80EE95A2A96626F00B84315 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B816AB0F2A93BA22003A850D /* TransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsView.swift; sourceTree = "<group>"; };
 		B816AB112A93BDAC003A850D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B816AB132A93C13A003A850D /* TransactionsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsAPI.swift; sourceTree = "<group>"; };
@@ -62,7 +65,6 @@
 		B8D21AF62A93B50A006AED82 /* WorldOfPAYBACKApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldOfPAYBACKApp.swift; sourceTree = "<group>"; };
 		B8D21AF82A93B50A006AED82 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B8D21AFA2A93B50B006AED82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B8D21AFD2A93B50B006AED82 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B8D21AFF2A93B50B006AED82 /* WorldOfPAYBACK.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WorldOfPAYBACK.entitlements; sourceTree = "<group>"; };
 		B8D21B042A93B50B006AED82 /* WorldOfPAYBACKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldOfPAYBACKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8D21B0E2A93B50B006AED82 /* WorldOfPAYBACKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldOfPAYBACKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,14 @@
 				B80EE94F2A96532A00B84315 /* TransactionDetailsView.swift */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		B80EE9532A9660B100B84315 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B80EE9582A96626700B84315 /* Localizable.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		B816AB0D2A93B9C1003A850D /* Views */ = {
@@ -221,17 +231,9 @@
 				B859ED462A94FBB10096CD8C /* Model */,
 				B816AB122A93C0F1003A850D /* Network */,
 				B816AB0D2A93B9C1003A850D /* Views */,
-				B8D21AFC2A93B50B006AED82 /* Preview Content */,
+				B80EE9532A9660B100B84315 /* Resources */,
 			);
 			path = WorldOfPAYBACK;
-			sourceTree = "<group>";
-		};
-		B8D21AFC2A93B50B006AED82 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				B8D21AFD2A93B50B006AED82 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		B8D21B072A93B50B006AED82 /* WorldOfPAYBACKTests */ = {
@@ -338,7 +340,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				de,
+				"pt-BR",
 			);
 			mainGroup = B8D21AEA2A93B50A006AED82;
 			productRefGroup = B8D21AF42A93B50A006AED82 /* Products */;
@@ -357,8 +360,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8D21AFE2A93B50B006AED82 /* Preview Assets.xcassets in Resources */,
 				B816AB222A93DFCD003A850D /* PBTransactions.json in Resources */,
+				B80EE9562A96626700B84315 /* Localizable.strings in Resources */,
 				B8D21AFB2A93B50B006AED82 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,6 +434,19 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		B80EE9582A96626700B84315 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B80EE9572A96626700B84315 /* en */,
+				B80EE9592A96626D00B84315 /* de */,
+				B80EE95A2A96626F00B84315 /* pt-BR */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		B8D21B162A93B50B006AED82 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -482,6 +498,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -536,6 +553,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -554,7 +572,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WorldOfPAYBACK/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WorldOfPAYBACK/Info.plist;
@@ -587,7 +604,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WorldOfPAYBACK/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WorldOfPAYBACK/Info.plist;

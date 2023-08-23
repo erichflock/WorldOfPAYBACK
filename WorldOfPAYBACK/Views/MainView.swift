@@ -12,7 +12,9 @@ struct MainView: View {
         TabView {
             TransactionsView()
                 .tabItem({
-                    Label("Transactions", systemImage: "list.bullet.rectangle.portrait")
+                    Label(NSLocalizedString("transactions",
+                                            comment: ""),
+                          systemImage: "list.bullet.rectangle.portrait")
                 })
         }
     }

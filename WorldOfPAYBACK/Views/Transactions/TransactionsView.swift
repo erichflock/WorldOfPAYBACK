@@ -26,9 +26,11 @@ struct TransactionsView: View {
                     }
                 }
                 .searchable(text: $viewModel.searchedCategory,
-                            prompt: Text("Category"))
+                            prompt: Text(NSLocalizedString("category",
+                                                           comment: "")))
                 .keyboardType(.numberPad)
-                .navigationTitle("Transactions")
+                .navigationTitle(NSLocalizedString("transactions",
+                                                   comment: ""))
             }
         }
         .onAppear {
@@ -40,7 +42,7 @@ struct TransactionsView: View {
         HStack {
             Text("")
             Spacer()
-            Text("Sum: \(viewModel.getSumOfFilteredItems()) \(TransactionItem.TransactionDetail.Currency.PBP.name)")
+            Text("\(NSLocalizedString("sum", comment: "")): \(viewModel.getSumOfFilteredItems()) \(TransactionItem.TransactionDetail.Currency.PBP.name)")
                 .font(.subheadline)
         }
     }
