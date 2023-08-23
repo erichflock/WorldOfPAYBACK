@@ -108,6 +108,7 @@
 		B80EE9532A9660B100B84315 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B8D21AFA2A93B50B006AED82 /* Assets.xcassets */,
 				B80EE9582A96626700B84315 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -226,7 +227,6 @@
 			children = (
 				B816AB112A93BDAC003A850D /* Info.plist */,
 				B8D21AF62A93B50A006AED82 /* WorldOfPAYBACKApp.swift */,
-				B8D21AFA2A93B50B006AED82 /* Assets.xcassets */,
 				B8D21AFF2A93B50B006AED82 /* WorldOfPAYBACK.entitlements */,
 				B859ED462A94FBB10096CD8C /* Model */,
 				B816AB122A93C0F1003A850D /* Network */,
