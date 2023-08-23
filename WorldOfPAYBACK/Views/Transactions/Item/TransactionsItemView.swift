@@ -29,7 +29,6 @@ struct TransactionsItemView: View {
                 .font(.subheadline)
                 .foregroundColor(.gray)
         }
-        .background(.white)
     }
 }
 
