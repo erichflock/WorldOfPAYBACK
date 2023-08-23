@@ -7,25 +7,35 @@
 
 import Foundation
 
+protocol TransactionsAPIProtocol {
+    func getTransactionsProd() async throws -> TransactionsApiModel?
+    func getTransactionsTest() async throws -> TransactionsApiModel?
+    func getMockData() throws -> TransactionsApiModel?
+}
+
 enum TransactionsAPIError: Error {
     case invalidUrl
     case decodeError
 }
 
-final class TransactionsAPI {
+final class TransactionsAPI: TransactionsAPIProtocol {
     
-    func getTransactions() async throws -> TransactionsApiModel? {
-        var urlString = "\(NetworkConfig.URL.production)/\(NetworkConfig.URL.Path.transactions)"
-#if DEBUG
-        urlString = "\(NetworkConfig.URL.test)/\(NetworkConfig.URL.Path.transactions)"
-#endif
+    func getTransactionsProd() async throws -> TransactionsApiModel? {
+        let urlString = "\(NetworkConfig.URL.production)/\(NetworkConfig.URL.Path.transactions)"
         guard let url = URL(string: urlString) else { throw TransactionsAPIError.invalidUrl }
         
         let (data, _) = try await URLSession.shared.data(from: url)
         return try decode(data: data)
     }
     
-    //TODO: Remove it when API is live
+    func getTransactionsTest() async throws -> TransactionsApiModel? {
+        let urlString = "\(NetworkConfig.URL.test)/\(NetworkConfig.URL.Path.transactions)"
+        guard let url = URL(string: urlString) else { throw TransactionsAPIError.invalidUrl }
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return try decode(data: data)
+    }
+    
     func getMockData() throws -> TransactionsApiModel? {
         guard let url = Bundle.main.url(forResource: "PBTransactions", withExtension: "json") else { return nil }
         let data = try Data(contentsOf: url)

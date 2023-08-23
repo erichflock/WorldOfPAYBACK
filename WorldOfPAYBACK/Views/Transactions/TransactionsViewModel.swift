@@ -9,6 +9,8 @@ import SwiftUI
 
 final class TransactionsViewModel: ObservableObject {
     
+    private let transactionsApi: TransactionsAPIProtocol
+    
     private(set) var items: [TransactionItem] = [] {
         didSet {
             filteredItems = items.sortByDate()
@@ -23,18 +25,38 @@ final class TransactionsViewModel: ObservableObject {
         }
     }
     
-    init(items: [TransactionItem] = []) {
+    @Published var showErrorAlert = false
+    
+    init(items: [TransactionItem] = [], transactionsApi: TransactionsAPIProtocol = TransactionsAPI()) {
         let sortedItems = items.sortByDate()
         self.items = sortedItems
         self.filteredItems = sortedItems
+        self.transactionsApi = transactionsApi
     }
     
-    func fetchTransactions() {
-        do {
-            let transactionItemsFromApi = try TransactionsAPI().getMockData()
-            items = mapItems(from: transactionItemsFromApi?.items).sortByDate()
-        } catch {
-            //show alert
+    func fetchTransactions() async {
+        switch NetworkConfig.networkEnvironment {
+        case .production:
+            do {
+                let transactionItemsFromApi = try await transactionsApi.getTransactionsProd()
+                handleItemsUpdate(transactionItemsFromApi)
+            } catch {
+                handleFetchError()
+            }
+        case .test:
+            do {
+                let transactionItemsFromApi = try await transactionsApi.getTransactionsTest()
+                handleItemsUpdate(transactionItemsFromApi)
+            } catch {
+                handleFetchError()
+            }
+        case .mock:
+            do {
+                let transactionItemsFromApi = try transactionsApi.getMockData()
+                handleItemsUpdate(transactionItemsFromApi)
+            } catch {
+                handleFetchError()
+            }
         }
     }
     
@@ -52,6 +74,24 @@ final class TransactionsViewModel: ObservableObject {
             return
         }
         filteredItems = items.filter { $0.category == category }.sortByDate()
+    }
+    
+    private func handleFetchError() {
+        DispatchQueue.main.async { [weak self] in
+            self?.items.removeAll()
+            self?.showErrorAlert = true
+        }
+    }
+    
+    private func handleItemsUpdate(_ apiModel: TransactionsApiModel?) {
+        guard let apiModel else {
+            handleFetchError()
+            return
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.items = self?.mapItems(from: apiModel.items).sortByDate() ?? []
+        }
     }
     
 }

@@ -48,11 +48,20 @@ struct TransactionsView: View {
         }
         .onAppear {
             internetConnection.checkConnection()
-            viewModel.fetchTransactions()
+            Task {
+                await viewModel.fetchTransactions()
+            }
         }
         .onChange(of: internetConnection.connected) { connected in
             if connected {
-                viewModel.fetchTransactions()
+                Task {
+                    await viewModel.fetchTransactions()
+                }
+            }
+        }
+        .alert("Fetch Error\nPlease try again later", isPresented: $viewModel.showErrorAlert) {
+            Button("OK", role: .cancel) {
+                viewModel.showErrorAlert = false
             }
         }
     }
