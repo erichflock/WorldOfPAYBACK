@@ -10,6 +10,10 @@ import XCTest
 
 final class TransactionsViewModelTests: XCTestCase {
     
+    override func tearDownWithError() throws {
+        NetworkConfig.networkEnvironment = .production
+    }
+    
     let items: [TransactionItem] = [.init(partnerDisplayName: "first item", alias: .init(reference: "0"), category: 1, transactionDetail: .init(bookingDate: .now.advanced(by: -6), value: .init(amount: 1, currency: .PBP))),
                                     .init(partnerDisplayName: "second item", alias: .init(reference: "1"), category: 1, transactionDetail: .init(bookingDate: .now.advanced(by: -5), value: .init(amount: 2, currency: .PBP))),
                                     .init(partnerDisplayName: "third item", alias: .init(reference: "2"), category: 2, transactionDetail: .init(bookingDate: .now.advanced(by: -4), value: .init(amount: 3, currency: .PBP))),
@@ -135,12 +139,92 @@ final class TransactionsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.getSumOfFilteredItems(), 12)
     }
     
+    func test_fetchTransactions_whenProductionEnvironment_shouldCallGetTransactionsProd() async {
+        NetworkConfig.networkEnvironment = .production
+        let transactionsApiSpy = TransactionsApiSpy()
+        let sut: TransactionsViewModel = .init(transactionsApi: transactionsApiSpy)
+        XCTAssertEqual(NetworkConfig.networkEnvironment, .production)
+        XCTAssertEqual(transactionsApiSpy.getTransactionsProdCallCount, 0, "preconditon")
+        XCTAssertEqual(transactionsApiSpy.getTransactionsTestCallCount, 0, "preconditon")
+        XCTAssertEqual(transactionsApiSpy.getMockDataCallCount, 0, "preconditon")
+        
+        let task = Task {
+            await sut.fetchTransactions()
+        }
+        
+        await task.value
+        XCTAssertEqual(transactionsApiSpy.getTransactionsProdCallCount, 1)
+        XCTAssertEqual(transactionsApiSpy.getTransactionsTestCallCount, 0)
+        XCTAssertEqual(transactionsApiSpy.getMockDataCallCount, 0)
+    }
+    
+    func test_fetchTransactions_whenTestEnvironment_shouldCallGetTransactionsTest() async {
+        NetworkConfig.networkEnvironment = .test
+        let transactionsApiSpy = TransactionsApiSpy()
+        let sut: TransactionsViewModel = .init(transactionsApi: transactionsApiSpy)
+        XCTAssertEqual(NetworkConfig.networkEnvironment, .test)
+        XCTAssertEqual(transactionsApiSpy.getTransactionsProdCallCount, 0, "preconditon")
+        XCTAssertEqual(transactionsApiSpy.getTransactionsTestCallCount, 0, "preconditon")
+        XCTAssertEqual(transactionsApiSpy.getMockDataCallCount, 0, "preconditon")
+        
+        let task = Task {
+            await sut.fetchTransactions()
+        }
+        
+        await task.value
+        XCTAssertEqual(transactionsApiSpy.getTransactionsProdCallCount, 0)
+        XCTAssertEqual(transactionsApiSpy.getTransactionsTestCallCount, 1)
+        XCTAssertEqual(transactionsApiSpy.getMockDataCallCount, 0)
+    }
+    
+    func test_fetchTransactions_whenMockEnvironment_shouldCallGetMockData() async {
+        NetworkConfig.networkEnvironment = .mock
+        let transactionsApiSpy = TransactionsApiSpy()
+        let sut: TransactionsViewModel = .init(transactionsApi: transactionsApiSpy)
+        XCTAssertEqual(NetworkConfig.networkEnvironment, .mock)
+        XCTAssertEqual(transactionsApiSpy.getTransactionsProdCallCount, 0, "preconditon")
+        XCTAssertEqual(transactionsApiSpy.getTransactionsTestCallCount, 0, "preconditon")
+        XCTAssertEqual(transactionsApiSpy.getMockDataCallCount, 0, "preconditon")
+        
+        let task = Task {
+            await sut.fetchTransactions()
+        }
+        
+        await task.value
+        XCTAssertEqual(transactionsApiSpy.getTransactionsProdCallCount, 0)
+        XCTAssertEqual(transactionsApiSpy.getTransactionsTestCallCount, 0)
+        XCTAssertEqual(transactionsApiSpy.getMockDataCallCount, 1)
+    }
+    
 }
 
 extension TransactionItem: Equatable {
     
     public static func == (lhs: WorldOfPAYBACK.TransactionItem, rhs: WorldOfPAYBACK.TransactionItem) -> Bool {
         lhs.alias.reference == rhs.alias.reference
+    }
+    
+}
+
+private class TransactionsApiSpy: TransactionsAPIProtocol {
+    
+    private(set) var getTransactionsProdCallCount = 0
+    private(set) var getTransactionsTestCallCount = 0
+    private(set) var getMockDataCallCount = 0
+    
+    func getTransactionsProd() async throws -> WorldOfPAYBACK.TransactionsApiModel? {
+        getTransactionsProdCallCount += 1
+        return nil
+    }
+    
+    func getTransactionsTest() async throws -> WorldOfPAYBACK.TransactionsApiModel? {
+        getTransactionsTestCallCount += 1
+        return nil
+    }
+    
+    func getMockData() throws -> WorldOfPAYBACK.TransactionsApiModel? {
+        getMockDataCallCount += 1
+        return nil
     }
     
 }
