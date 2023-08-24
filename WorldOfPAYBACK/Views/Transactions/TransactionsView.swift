@@ -20,7 +20,10 @@ struct TransactionsView: View {
                     ForEach(viewModel.filteredItems) { item in
                         NavigationLink(destination: TransactionDetailsView(partnerDisplayName: item.partnerDisplayName,
                                                                            description: item.transactionDetail.description)) {
-                            TransactionsItemView(reference: item.alias.reference,
+                            TransactionsItemView(bookingDate: item.transactionDetail.bookingDate,
+                                                 partnerDisplayName: item.partnerDisplayName,
+                                                 description: item.transactionDetail.description,
+                                                 reference: item.alias.reference,
                                                  amount: item.transactionDetail.value.amount,
                                                  currency: item.transactionDetail.value.currency)
                         }

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct TransactionsItemView: View {
     
+    let bookingDate: Date
+    let partnerDisplayName: String
+    let description: String?
     let reference: String
     let amount: Int
     let currency: TransactionItem.TransactionDetail.Currency
@@ -16,8 +19,20 @@ struct TransactionsItemView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(reference)
-                    .font(.headline)
+                HStack(alignment: .center) {
+                    Text(partnerDisplayName)
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                    Text(reference)
+                        .font(.caption)
+                }
+                if let description {
+                    Text(description)
+                        .font(.caption)
+                        .foregroundColor(.primary)
+                }
+                Text(bookingDate.formatted())
+                    .font(.caption)
                     .foregroundColor(.primary)
             }
             Spacer()
@@ -30,6 +45,6 @@ struct TransactionsItemView: View {
 
 struct TransactionsItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionsItemView(reference: "795357452000810", amount: 100, currency: .PBP)
+        TransactionsItemView(bookingDate: .now, partnerDisplayName: "Rewe", description: "Description", reference: "795357452000810", amount: 100, currency: .PBP)
     }
 }
