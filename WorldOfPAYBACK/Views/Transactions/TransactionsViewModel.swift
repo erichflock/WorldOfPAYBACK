@@ -26,6 +26,7 @@ final class TransactionsViewModel: ObservableObject {
     }
     
     @Published var showErrorAlert = false
+    @Published private(set) var isLoading = false
     
     init(items: [TransactionItem] = [], transactionsApi: TransactionsAPIProtocol = TransactionsAPI()) {
         let sortedItems = items.sortByDate()
@@ -34,7 +35,9 @@ final class TransactionsViewModel: ObservableObject {
         self.transactionsApi = transactionsApi
     }
     
-    func fetchTransactions() async {
+    func fetchTransactions(delay: TimeInterval = 2) async {
+        await delayTask(for: delay)
+        
         switch NetworkConfig.networkEnvironment {
         case .production:
             do {
@@ -92,6 +95,12 @@ final class TransactionsViewModel: ObservableObject {
         DispatchQueue.main.async { [weak self] in
             self?.items = self?.mapItems(from: apiModel.items).sortByDate() ?? []
         }
+    }
+    
+    private func delayTask(for seconds: TimeInterval) async {
+        do {
+            try await Task.sleep(for: .seconds(seconds))
+        } catch {}
     }
     
 }

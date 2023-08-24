@@ -149,7 +149,7 @@ final class TransactionsViewModelTests: XCTestCase {
         XCTAssertEqual(transactionsApiSpy.getMockDataCallCount, 0, "preconditon")
         
         let task = Task {
-            await sut.fetchTransactions()
+            await sut.fetchTransactions(delay: 0)
         }
         
         await task.value
@@ -168,7 +168,7 @@ final class TransactionsViewModelTests: XCTestCase {
         XCTAssertEqual(transactionsApiSpy.getMockDataCallCount, 0, "preconditon")
         
         let task = Task {
-            await sut.fetchTransactions()
+            await sut.fetchTransactions(delay: 0)
         }
         
         await task.value
@@ -187,7 +187,7 @@ final class TransactionsViewModelTests: XCTestCase {
         XCTAssertEqual(transactionsApiSpy.getMockDataCallCount, 0, "preconditon")
         
         let task = Task {
-            await sut.fetchTransactions()
+            await sut.fetchTransactions(delay: 0)
         }
         
         await task.value
