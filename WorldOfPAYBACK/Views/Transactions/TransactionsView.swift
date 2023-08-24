@@ -15,7 +15,7 @@ struct TransactionsView: View {
     var body: some View {
         NavigationView {
             List {
-                if internetConnection.connected {
+                if internetConnection.connected && !viewModel.isLoading {
                     sumView
                     ForEach(viewModel.filteredItems) { item in
                         NavigationLink(destination: TransactionDetailsView(partnerDisplayName: item.partnerDisplayName,
@@ -43,6 +43,13 @@ struct TransactionsView: View {
                             .multilineTextAlignment(.center)
                     }
                     .offset(y: -50)
+                } else if viewModel.isLoading {
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                            .controlSize(.large)
+                        Spacer()
+                    }
                 }
             }
         }

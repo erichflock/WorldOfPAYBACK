@@ -36,8 +36,10 @@ final class TransactionsViewModel: ObservableObject {
     }
     
     func fetchTransactions(delay: TimeInterval = 2) async {
+        showLoading(true)
         await delayTask(for: delay)
-        
+        showLoading(false)
+            
         switch NetworkConfig.networkEnvironment {
         case .production:
             do {
@@ -97,12 +99,6 @@ final class TransactionsViewModel: ObservableObject {
         }
     }
     
-    private func delayTask(for seconds: TimeInterval) async {
-        do {
-            try await Task.sleep(for: .seconds(seconds))
-        } catch {}
-    }
-    
 }
 
 //MARK: Mapper Functions
@@ -133,4 +129,21 @@ extension TransactionsViewModel {
         case .PBP : return .PBP
         }
     }
+}
+
+//MARK: Loading
+extension TransactionsViewModel {
+    
+    private func delayTask(for seconds: TimeInterval) async {
+        do {
+            try await Task.sleep(for: .seconds(seconds))
+        } catch {}
+    }
+    
+    private func showLoading(_ show: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.isLoading = show
+        }
+    }
+    
 }
