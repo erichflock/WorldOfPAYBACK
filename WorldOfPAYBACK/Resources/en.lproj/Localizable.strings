@@ -9,5 +9,7 @@
 "transactions"="Transactions";
 "category"="Category";
 "sum"="Sum";
-"noInternetMessage" = "No internet.\nPlease check your internet connection.";
+"ok"="OK";
 "settings"="Settings";
+"error_internet"="No internet.\nPlease check your internet connection.";
+"error_fetch"="Error\nPlease try again later";

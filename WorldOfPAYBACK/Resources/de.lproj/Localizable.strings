@@ -9,5 +9,7 @@
 "transactions"="Transaktionen";
 "category"="Kategorie";
 "sum"="Summe";
-"noInternetMessage" = "Kein Internet.\nBitte überprüfen Sie Ihre Internetverbindung.";
+"ok"="OK";
 "settings"="Einstellungen";
+"error_internet"="Kein Internet.\nBitte überprüfen Sie Ihre Internetverbindung.";
+"error_fetch"="Fehker\nBitte versuchen Sie es später noch einmal";

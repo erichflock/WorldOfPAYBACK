@@ -41,7 +41,7 @@ struct TransactionsView: View {
                     VStack(alignment: .center, spacing: 10) {
                         Image(systemName: "icloud.slash")
                             .font(.system(size: 60))
-                        Text(NSLocalizedString("noInternetMessage", comment: ""))
+                        Text(NSLocalizedString("error_internet", comment: ""))
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                     }
@@ -72,8 +72,10 @@ struct TransactionsView: View {
                 }
             }
         }
-        .alert("Fetch Error\nPlease try again later", isPresented: $viewModel.showErrorAlert) {
-            Button("OK", role: .cancel) {
+        .alert(NSLocalizedString("error_fetch", comment: ""),
+               isPresented: $viewModel.showErrorAlert) {
+            Button(NSLocalizedString("ok", comment: ""),
+                   role: .cancel) {
                 viewModel.showErrorAlert = false
             }
         }
