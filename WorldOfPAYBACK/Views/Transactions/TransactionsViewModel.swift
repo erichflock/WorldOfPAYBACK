@@ -28,6 +28,8 @@ final class TransactionsViewModel: ObservableObject {
     @Published var showErrorAlert = false
     @Published private(set) var isLoading = false
     
+    var task: Task<Void, Never>? 
+    
     init(items: [TransactionItem] = [], transactionsApi: TransactionsAPIProtocol = TransactionsAPI()) {
         let sortedItems = items.sortByDate()
         self.items = sortedItems
@@ -82,6 +84,8 @@ final class TransactionsViewModel: ObservableObject {
     }
     
     private func handleFetchError() {
+        guard task?.isCancelled == false else { return }
+        
         DispatchQueue.main.async { [weak self] in
             self?.items.removeAll()
             self?.showErrorAlert = true

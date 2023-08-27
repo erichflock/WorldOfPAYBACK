@@ -58,13 +58,16 @@ struct TransactionsView: View {
         }
         .onAppear {
             internetConnection.checkConnection()
-            Task {
+            viewModel.task = Task {
                 await viewModel.fetchTransactions()
             }
         }
+        .onDisappear {
+            viewModel.task?.cancel()
+        }
         .onChange(of: internetConnection.connected) { connected in
             if connected {
-                Task {
+                viewModel.task = Task {
                     await viewModel.fetchTransactions()
                 }
             }
